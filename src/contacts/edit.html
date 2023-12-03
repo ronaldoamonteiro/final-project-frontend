@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Contact</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <main class="page-container">
+    <div class="phone-card">
+      <div class="card-header">
+        <img src="/images/contact.svg" alt="Contact Icon">
+        <h1>Phone Book App</h1>
+      </div>
+      <div class="page-info">
+        <div class="title-container">
+          <div class="title">
+            <h3>Add contact</h3>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <form id="form" class="form">
+          <div class="input-container">
+            <label for="contact_firstname">First Name</label>
+            <input type="text" id="contact_firstname" name="firstname" minlength="1" placeholder="First Name">
+          </div>
+          <div class="input-container">
+            <label for="contact_lastname">Last Name</label>
+            <input type="text" id="contact_lastname" name="lastname" minlength="1" placeholder="Last Name">
+          </div>
+          <div class="input-container">
+            <label for="contact_phonenumber">Phone Number</label>
+            <input type="number" id="contact_phonenumber" name="phone_number" placeholder="Phone Name">
+          </div>
+          <div class="button-container">
+            <button type="button" type="button" id="go_back">Go back</button>
+            <button type="submit" class="primary-btn" id="edit_contact">Edit Contact</button>
+          </div>
+          <!-- Hidden field for id -->
+          <input type="hidden" id="contact_id" name="contact_id" placeholder="Id">
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+<script type="module" src="/js/edit-contact.js"></script>
+
+</html>
