@@ -8,7 +8,6 @@ window.addEventListener("load", async () => {
     // const response = await fetch("http://localhost:3000/contact");
     // const data = await response.json();
     const data = localStorage.getContactsFromLocalStorage("contacts");
-    console.log({ data });
     content.innerHTML = retrieveCard(data);
     // contactCardEditProcess();
   } catch (error) {
@@ -61,6 +60,16 @@ function retrieveCard(contacts) {
 
   return card;
 }
+
+document.getElementById("search-input").addEventListener("keyup", (event) => {
+  const content = document.querySelector(".content");
+  content.innerHTML = "";
+  const filteredContacts = localStorage.getContactsFromLocalStorage(
+    "contacts",
+    event.target.value
+  );
+  content.innerHTML = retrieveCard(filteredContacts);
+});
 
 window.goToAddContactPage = goToAddContactPage;
 window.handleEditButtonClick = handleEditButtonClick;

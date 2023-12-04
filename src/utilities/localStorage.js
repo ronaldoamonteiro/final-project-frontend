@@ -39,13 +39,21 @@ class LocalStorageUtilities {
     }
   };
 
-  getContactsFromLocalStorage = (key) => {
+  getContactsFromLocalStorage = (key, contact_lastname) => {
     const data = localStorage.getItem(key);
     if (data == null) {
       return [];
     }
 
-    return JSON.parse(data);
+    if (contact_lastname == null) {
+      return JSON.parse(data);
+    }
+
+    const returnedArray = JSON.parse(data).filter((contact) =>
+      contact.lastname.toLowerCase().includes(contact_lastname.toLowerCase())
+    );
+
+    return returnedArray;
   };
 
   getContactByIdFromLocalStorage = (key, id) => {
@@ -67,7 +75,6 @@ class LocalStorageUtilities {
 
   updateContactFromLocalStorage = (key, id, contact) => {
     const data = localStorage.getItem(key);
-    console.log({ contact });
     if (data == null) {
       throw new Error("Id not found!");
     }

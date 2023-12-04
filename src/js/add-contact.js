@@ -1,34 +1,92 @@
 import localStorage from "../utilities/localStorage";
 
+// Error label
+function addErrorLabel(inputFieldId, description) {
+  const firstNameParent = document.getElementById(inputFieldId).parentNode;
+  const label = document.createElement("label");
+  label.className = "error-label";
+  label.id = `${inputFieldId}-error`;
+  label.style.fontSize = "0.75rem";
+  label.style.color = "red";
+  label.innerText = description;
+
+  firstNameParent.appendChild(label);
+}
+
+document
+  .getElementById("contact_firstname")
+  .addEventListener("keyup", (event) => {
+    const firstNameParent =
+      document.getElementById("contact_firstname").parentNode;
+    if (
+      event.target.value.length > 1 &&
+      firstNameParent.lastChild.id === "contact_firstname-error"
+    ) {
+      firstNameParent.removeChild(firstNameParent.lastChild);
+    }
+  });
+
+document
+  .getElementById("contact_lastname")
+  .addEventListener("keyup", (event) => {
+    const firstNameParent =
+      document.getElementById("contact_lastname").parentNode;
+    if (
+      event.target.value.length > 1 &&
+      firstNameParent.lastChild.id === "contact_lastname-error"
+    ) {
+      firstNameParent.removeChild(firstNameParent.lastChild);
+    }
+  });
+
+document
+  .getElementById("contact_phonenumber")
+  .addEventListener("keyup", (event) => {
+    const firstNameParent = document.getElementById(
+      "contact_phonenumber"
+    ).parentNode;
+    if (
+      event.target.value.length > 6 &&
+      firstNameParent.lastChild.id === "contact_phonenumber-error"
+    ) {
+      firstNameParent.removeChild(firstNameParent.lastChild);
+    }
+  });
+
 document.getElementById("form").addEventListener("submit", (event) => {
   try {
     event.preventDefault();
     const form = document.querySelector("#form");
     const submitter = document.querySelector("#add_contact");
-    console.log({ submitter });
     const formData = new FormData(form, submitter);
+
+    const errors = [];
 
     // validation
     if (formData.get("firstname").length < 1) {
-      throw new Error(
-        JSON.stringify({
-          firstname: "First name must be, at least, 1 character long",
-        })
+      addErrorLabel(
+        "contact_firstname",
+        "First name must be, at least, 1 character long"
       );
+      errors.push("First name must be, at least, 1 character long\n\n");
     }
     if (formData.get("lastname").length < 1) {
-      throw new Error(
-        JSON.stringify({
-          lastname: "Last name must be, at least, 1 character long",
-        })
+      addErrorLabel(
+        "contact_lastname",
+        "Last name must be, at least, 1 character long"
       );
+      errors.push("Last name must be, at least, 1 character long\n\n");
     }
     if (String(formData.get("phone_number")).length < 6) {
-      throw new Error(
-        JSON.stringify({
-          phone_number: "Phone number must be, at least, 6 character long",
-        })
+      addErrorLabel(
+        "contact_phonenumber",
+        "Phone number must be, at least, 6 characters long"
       );
+      errors.push("Phone number must be, at least, 6 characters long\n\n");
+    }
+
+    if (errors.length > 0) {
+      throw new Error(errors.join(""));
     }
 
     localStorage.addContactToLocalStorage("contacts", {

@@ -13,11 +13,9 @@ const queryParams = new URLSearchParams(window.location.search);
   if (queryParams.has("id")) {
     const data = await retrieveItemData(queryParams.get("id"));
     Object.keys(data).forEach((key) => {
-      console.log({ key });
       const fieldToUpdate = document.getElementById(
         `contact_` + key.replace("_", "")
       );
-      console.log("@@@@", fieldToUpdate);
       if (key !== "id") {
         fieldToUpdate.disabled = true;
       }
