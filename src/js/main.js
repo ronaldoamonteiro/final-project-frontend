@@ -31,22 +31,26 @@ const handleDeleteButtonClick = (id) => {
 
 function retrieveCard(contacts) {
   let card = "";
+  // const editImage = path.resolve("images", "delete.svg");
+  const editImage = "/edit.svg";
+  const deleteImage = "/delete.svg";
+  const phoneImage = "/phone.svg";
   contacts.forEach((contact) => {
     card += `
       <div class="card">
         <div class="contact-info">
           <h4>${contact.firstname} ${contact.lastname}</h4>
           <div class="contact-number">
-            <img src="/images/phone.svg" alt="">
+            <img src="${phoneImage}" alt="">
             <span>${contact.phone_number}</span>
           </div>
         </div>
         <div class="button-container">
           <button type="button" class="no-bg-btn" onclick="handleEditButtonClick(${contact.id})">
-            <img src="/images/edit.svg" alt="">
+            <img src="${editImage}" alt="">
           </button>
           <button type="button" class="no-bg-btn" onclick="handleDeleteButtonClick(${contact.id})">
-            <img src="/images/delete.svg" alt="">
+            <img src="${deleteImage}" alt="">
           </button>
         </div>
       </div>
