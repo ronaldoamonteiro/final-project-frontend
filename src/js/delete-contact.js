@@ -1,4 +1,4 @@
-import localStorage from "../../utilities/localStorage";
+import localStorage from "../utilities/localStorage";
 
 async function retrieveItemData(id) {
   return localStorage.getContactByIdFromLocalStorage("contacts", id);
@@ -17,7 +17,10 @@ const queryParams = new URLSearchParams(window.location.search);
       const fieldToUpdate = document.getElementById(
         `contact_` + key.replace("_", "")
       );
-      console.log(fieldToUpdate);
+      console.log("@@@@", fieldToUpdate);
+      if (key !== "id") {
+        fieldToUpdate.disabled = true;
+      }
       if (fieldToUpdate) {
         fieldToUpdate.value = data[key];
       }
@@ -32,52 +35,16 @@ document.getElementById("form").addEventListener("submit", async (event) => {
   try {
     event.preventDefault();
     const form = document.querySelector("#form");
-    const submitter = document.querySelector("#edit_contact");
+    const submitter = document.querySelector("#delete_contact");
     const formData = new FormData(form, submitter);
 
-    // validation
-    if (formData.get("firstname").length < 1) {
-      throw new Error(
-        JSON.stringify({
-          firstname: "First name must be, at least, 1 character long",
-        })
-      );
-    }
-    if (formData.get("lastname").length < 1) {
-      throw new Error(
-        JSON.stringify({
-          lastname: "Last name must be, at least, 1 character long",
-        })
-      );
-    }
-    if (String(formData.get("phone_number")).length < 6) {
-      throw new Error(
-        JSON.stringify({
-          phone_number: "Phone number must be, at least, 6 character long",
-        })
-      );
-    }
-
-    localStorage.updateContactFromLocalStorage(
+    localStorage.removeContactFromLocalStorage(
       "contacts",
-      formData.get("contact_id"),
-      {
-        firstname: formData.get("firstname"),
-        lastname: formData.get("lastname"),
-        phone_number: String(formData.get("phone_number")),
-      }
+      formData.get("contact_id")
     );
     location.replace("/index.html");
     // fetch(`http://localhost:3000/contact/${formData.get("contact_id")}`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     firstname: formData.get("firstname"),
-    //     lastname: formData.get("lastname"),
-    //     phone_number: String(formData.get("phone_number")),
-    //   }),
+    //   method: "DELETE",
     // })
     //   .then(() => {
     //     location.replace("/index.html");

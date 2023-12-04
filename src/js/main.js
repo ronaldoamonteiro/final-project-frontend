@@ -1,4 +1,4 @@
-import localStorage from "../../utilities/localStorage";
+import localStorage from "../utilities/localStorage";
 
 // First render
 window.addEventListener("load", async () => {

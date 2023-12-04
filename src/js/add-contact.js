@@ -1,4 +1,4 @@
-import localStorage from "../../utilities/localStorage";
+import localStorage from "../utilities/localStorage";
 
 document.getElementById("form").addEventListener("submit", (event) => {
   try {
