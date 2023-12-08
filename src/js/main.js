@@ -1,15 +1,14 @@
 import localStorage from "../utilities/localStorage";
 
-// First render
+// Evento de escuta para toda vez que houver um carregamento da página. Neste caso, a página index.html
 window.addEventListener("load", async () => {
+  // Busca pela classe ".content"
   const content = document.querySelector(".content");
-  // Makes API call here
   try {
-    // const response = await fetch("http://localhost:3000/contact");
-    // const data = await response.json();
+    // Busca pelas informações em localStorage
     const data = localStorage.getContactsFromLocalStorage("contacts");
+    // Para cada contato, cria um card
     content.innerHTML = retrieveCard(data);
-    // contactCardEditProcess();
   } catch (error) {
     console.table(error);
     content.innerHTML = `${error.message}!`;
@@ -17,23 +16,28 @@ window.addEventListener("load", async () => {
   }
 });
 
+// Função para redirecionamento à página de criação de contatos
 function goToAddContactPage() {
   location.replace(`/contacts/add.html`);
 }
 
+// Função para o redirecionamento à página de edição de contatos
 const handleEditButtonClick = (id) => {
   location.replace(`/contacts/edit.html?id=${id}`);
 };
+// Função para o redirecionamento à página de deleção de contatos
 const handleDeleteButtonClick = (id) => {
   location.replace(`/contacts/delete.html?id=${id}`);
 };
 
+// Função que permite a criação da lista de cards/contatos na tela inicial. Recebe um array de contatos
 function retrieveCard(contacts) {
   let card = "";
-  // const editImage = path.resolve("images", "delete.svg");
+  // Cada uma das imagens é definida aqui, pois o Babel não consegue colocar hashes nos seus bundles, ou seja, elas não passam por "criptografia"
   const editImage = "/edit.svg";
   const deleteImage = "/delete.svg";
   const phoneImage = "/phone.svg";
+  // Para cada um dos contatos na lista de contatos, cria um card
   contacts.forEach((contact) => {
     card += `
       <div class="card">
@@ -61,16 +65,22 @@ function retrieveCard(contacts) {
   return card;
 }
 
+// Este evento de escuta permite ao usuário, após soltar o botão do teclado, pesquisar o contato pelo seu sobrenome (last name)
 document.getElementById("search-input").addEventListener("keyup", (event) => {
+  // Busca pela classe '.content'
   const content = document.querySelector(".content");
+  // Limpa a lista de contatos
   content.innerHTML = "";
+  // Filtra os contatos pelo sobrenome
   const filteredContacts = localStorage.getContactsFromLocalStorage(
     "contacts",
     event.target.value
   );
+  // Remonta a lista de contatos
   content.innerHTML = retrieveCard(filteredContacts);
 });
 
+// Permitem o acesso global às funções definidas mais acima
 window.goToAddContactPage = goToAddContactPage;
 window.handleEditButtonClick = handleEditButtonClick;
 window.handleDeleteButtonClick = handleDeleteButtonClick;

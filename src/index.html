@@ -9,28 +9,34 @@
 </head>
 
 <body>
+  <!-- Estrutura geral das páginas -->
   <main class="page-container">
     <div class="phone-card">
+      <!-- Cabeçalho geral com o nome da aplicação -->
       <div class="card-header">
         <img src="/images/contact.svg" alt="Contact Icon">
         <h1>Phone Book App</h1>
       </div>
+      <!-- Cabeçalho específico com o nome da página -->
       <div class="page-info">
         <div class="title-container">
           <div class="title">
             <h3>Contacts</h3>
           </div>
+          <!-- Botão que direciona para a página de cadastro de contatos -->
           <button type="button" id="add-contacts" onclick="goToAddContactPage()">
             <img src="/images/add.svg" alt="Add Icon">
             Add Contact
           </button>
         </div>
+        <!-- Campo de pesquisa/filtro por sobrenome de contato -->
         <div class="search-bar">
           <img src="/images/search.svg" alt="">
           <input class="search-input" id="search-input" placeholder="Search for contact by last name" type="text"
             value="">
         </div>
       </div>
+      <!-- Campo que permite a inserção dos contatos cadastrados em localStorage de modo dinâmico -->
       <div class="content">
       </div>
     </div>
@@ -38,4 +44,5 @@
 </body>
 
 </html>
+<!-- JS para a página inicial -->
 <script type="module" src="/js/main.js"></script>
