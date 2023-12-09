@@ -1,7 +1,10 @@
 import localStorage from "../utilities/localStorage";
-
 // Recupera as informações do seu contato por meio do id
 async function retrieveItemData(id) {
+  /**
+   * Example using JSON Server API
+   */
+  // return contactApi.getContactById(id);
   return localStorage.getContactByIdFromLocalStorage("contacts", id);
 }
 
@@ -51,6 +54,11 @@ document.getElementById("form").addEventListener("submit", async (event) => {
       "contacts",
       formData.get("contact_id")
     );
+    /**
+     * Example using JSON Server API
+     *
+     */
+    // contactApi.deleteContact(formData.get("contact_id"));
     // Redireciona a aplicação
     location.replace("/index.html");
   } catch (e) {

@@ -1,5 +1,4 @@
 import localStorage from "../utilities/localStorage";
-
 // Evento de escuta para toda vez que houver um carregamento da página. Neste caso, a página index.html
 window.addEventListener("load", async () => {
   // Busca pela classe ".content"
@@ -7,6 +6,10 @@ window.addEventListener("load", async () => {
   try {
     // Busca pelas informações em localStorage
     const data = localStorage.getContactsFromLocalStorage("contacts");
+    /**
+     * Example using JSON Server API
+     */
+    // const data = contactApi.getContacts();
     // Para cada contato, cria um card
     content.innerHTML = retrieveCard(data);
   } catch (error) {

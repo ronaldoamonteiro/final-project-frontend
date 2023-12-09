@@ -1,5 +1,4 @@
 import localStorage from "../utilities/localStorage";
-
 // Error label
 // Função responsável por gerar os labels de erro para os campos de texto da página
 function addErrorLabel(inputFieldId, description) {
@@ -111,8 +110,20 @@ document.getElementById("form").addEventListener("submit", (event) => {
       lastname: formData.get("lastname"),
       phone_number: String(formData.get("phone_number")),
     });
+
+    /**
+     *
+     * Reference for the JSON Server API Connection
+     *
+     *
+     */
+    // contactApi.addContact({
+    //   firstname: formData.get("firstname"),
+    //   lastname: formData.get("lastname"),
+    //   phone_number: String(formData.get("phone_number")),
+    // });
     // Redireciona a aplicação
-    location.replace("/index.html");
+    // location.replace("/index.html");
   } catch (e) {
     console.error(e);
   }
