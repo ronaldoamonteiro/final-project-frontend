@@ -123,7 +123,7 @@ document.getElementById("form").addEventListener("submit", (event) => {
     //   phone_number: String(formData.get("phone_number")),
     // });
     // Redireciona a aplicação
-    // location.replace("/index.html");
+    location.replace("/index.html");
   } catch (e) {
     console.error(e);
   }
